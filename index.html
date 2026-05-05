@@ -311,10 +311,10 @@
     #modal-submit {
       display: block;
       width: 100%;
-      padding: 16px;
+      padding: 20px 40px;
       background: #f5a623;
       color: #111111;
-      font-size: 1.1rem;
+      font-size: 22px;
       font-weight: 900;
       border: none;
       border-radius: 8px;
@@ -337,24 +337,24 @@
   <div id="modal-overlay">
     <div id="modal-box">
       <button id="modal-close" aria-label="Close">&times;</button>
-      <h2><span style="color:#f5a623;font-style:normal;">We Help Martial Arts Schools Get More Students With AI, Smart Websites, and 5 Star Reviews for Just</span> <span style="color:#111111;font-style:italic;font-size:1.2em;">$297/mo 👇</span></h2>
+      <h2><span style="display:block;color:#f5a623;">We Help Martial Arts Schools Get More Students With AI, Smart Websites, and 5 Star Reviews for Just</span><span style="display:block;color:#111111;font-style:italic;font-size:1.25em;">$297/mo 👇</span></h2>
 
       <form id="leadForm" novalidate>
 
         <div class="form-group">
-          <label for="fname">Your Name</label>
+          <label for="fname">Your Name <span style="color:#e63329;">*</span></label>
           <input type="text" id="fname" name="name" placeholder="John Smith" required />
           <div class="error-msg" id="nameError">Please enter your name.</div>
         </div>
 
         <div class="form-group">
-          <label for="fphone">Your Mobile Phone</label>
+          <label for="fphone">Your Mobile Phone <span style="color:#e63329;">*</span></label>
           <input type="tel" id="fphone" name="phone" placeholder="(555) 555-5555" required />
           <div class="error-msg" id="phoneError">Please enter your mobile phone number.</div>
         </div>
 
         <div class="form-group">
-          <label>What's your current monthly revenue?</label>
+          <label>What's your current monthly revenue? <span style="color:#e63329;">*</span></label>
           <div class="radio-group">
             <label><input type="radio" name="revenue" value="$0–$5,000" required /> $0–$5,000</label>
             <label><input type="radio" name="revenue" value="$5,000–$15,000" /> $5,000–$15,000</label>
@@ -501,7 +501,7 @@
       document.getElementById('revenueError').style.display = 'none';
 
       if (!name)    { document.getElementById('nameError').style.display    = 'block'; valid = false; }
-      if (!phone)   { document.getElementById('phoneError').style.display   = 'block'; valid = false; }
+      if (!phone)   { valid = false; }
       if (!revenue) { document.getElementById('revenueError').style.display = 'block'; valid = false; }
       if (!valid) return;
 
