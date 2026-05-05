@@ -505,18 +505,21 @@
       if (!revenue) { document.getElementById('revenueError').style.display = 'block'; valid = false; }
       if (!valid) return;
 
-      // Fire-and-forget — do not await
+      formDone = true;
+
       fetch(WEBHOOK, {
         method:  'POST',
-        mode:    'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ name: name, phone: phone, revenue: revenue.value })
+      })
+      .then(() => {
+        closeModal();
+        fbq('track', 'Lead');
+      })
+      .catch(() => {
+        closeModal();
+        fbq('track', 'Lead');
       });
-
-      fbq('track', 'Lead');
-
-      formDone = true;
-      closeModal();
 
       // Swap thumbnail for live iframe immediately
       videoThumb.style.display = 'none';
