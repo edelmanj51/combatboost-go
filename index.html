@@ -337,7 +337,7 @@
   <div id="modal-overlay">
     <div id="modal-box">
       <button id="modal-close" aria-label="Close">&times;</button>
-      <h2>We Help Martial Arts Schools Get More Students With AI, Smart Websites, and 5 Star Reviews for Just $297/mo 👇</h2>
+      <h2><span style="color:#f5a623;font-style:normal;">We Help Martial Arts Schools Get More Students With AI, Smart Websites, and 5 Star Reviews for Just</span> <span style="color:#111111;font-style:italic;font-size:1.2em;">$297/mo 👇</span></h2>
 
       <form id="leadForm" novalidate>
 
@@ -376,13 +376,13 @@
   <!-- Headline -->
   <div id="page-headline">
     <div class="container">
-      <h1>We Help Martial Arts Schools Get More Students With AI, Smart Websites, and 5 Star Reviews for Just $297/mo</h1>
+      <h1><span style="color:#f5a623;font-style:normal;">We Help Martial Arts Schools Get More Students With AI, Smart Websites, and 5 Star Reviews for Just</span> <span style="color:#111111;font-style:italic;font-size:1.2em;">$297/mo 👇</span></h1>
     </div>
   </div>
 
   <!-- Video -->
   <div id="video-section">
-    <div class="red-bar">⬇️ Step 1: Watch This 6 Min Video ⬇️</div>
+    <div class="red-bar">⬇️ Step 1: Watch This 7 Min Video ⬇️</div>
     <div class="container">
       <div class="video-outer" style="margin-top:24px;">
 
@@ -437,7 +437,7 @@
   </div>
 
   <script>
-    const WEBHOOK = 'https://services.leadconnectorhq.com/hooks/DxY1l0vBS9031FOFtjG2/webhook-trigger/b045ff08-3453-4ec2-a303-8b359a64df05';
+    const WEBHOOK = 'https://services.leadconnectorhq.com/hooks/DxY1l0vBS9031FOFtjG2/webhook-trigger/c5ae9ce5-f7a7-415c-a0ed-28e3a7981ef4';
 
     const overlay      = document.getElementById('modal-overlay');
     const videoThumb   = document.getElementById('video-thumb');
@@ -488,7 +488,7 @@
     });
 
     // ── Form submit ──
-    document.getElementById('leadForm').addEventListener('submit', async function (e) {
+    document.getElementById('leadForm').addEventListener('submit', function (e) {
       e.preventDefault();
 
       const name    = document.getElementById('fname').value.trim();
@@ -505,18 +505,13 @@
       if (!revenue) { document.getElementById('revenueError').style.display = 'block'; valid = false; }
       if (!valid) return;
 
-      const btn = document.getElementById('modal-submit');
-      btn.disabled    = true;
-      btn.textContent = 'Submitting…';
-
-      try {
-        await fetch(WEBHOOK, {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify({ name, phone, revenue: revenue.value }),
-          mode:    'no-cors'
-        });
-      } catch (_) {}
+      // Fire-and-forget — do not await
+      fetch(WEBHOOK, {
+        method:  'POST',
+        mode:    'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ name: name, phone: phone, revenue: revenue.value })
+      });
 
       fbq('track', 'Lead');
 
