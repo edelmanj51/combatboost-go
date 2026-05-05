@@ -39,105 +39,17 @@
       padding: 0 16px;
     }
 
-    /* ── Gate section ── */
-    #gate {
-      padding: 40px 0 48px;
-    }
-
-    #gate h1 {
-      font-size: clamp(1.25rem, 4vw, 1.75rem);
-      font-weight: 900;
-      line-height: 1.25;
-      color: #111111;
-      margin-bottom: 28px;
+    /* ── Page headline ── */
+    #page-headline {
+      padding: 36px 0 24px;
       text-align: center;
     }
 
-    .form-card {
-      background: #f7f7f7;
-      border: 2px solid #e63329;
-      border-radius: 10px;
-      padding: 28px 24px;
-    }
-
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    label {
-      display: block;
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-bottom: 6px;
-    }
-
-    input[type="text"],
-    input[type="tel"] {
-      width: 100%;
-      padding: 12px 14px;
-      font-size: 1rem;
-      border: 2px solid #cccccc;
-      border-radius: 6px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    input[type="text"]:focus,
-    input[type="tel"]:focus {
-      border-color: #e63329;
-    }
-
-    .radio-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .radio-group label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 500;
-      cursor: pointer;
-    }
-
-    .radio-group input[type="radio"] {
-      width: 18px;
-      height: 18px;
-      accent-color: #e63329;
-      flex-shrink: 0;
-    }
-
-    .btn-primary {
-      display: block;
-      width: 100%;
-      padding: 16px;
-      background: #e63329;
-      color: #ffffff;
-      font-size: 1.1rem;
+    #page-headline h1 {
+      font-size: clamp(1.2rem, 3.8vw, 1.65rem);
       font-weight: 900;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 24px;
-      letter-spacing: 0.01em;
-      transition: background 0.2s, transform 0.1s;
-    }
-
-    .btn-primary:hover  { background: #c9281f; }
-    .btn-primary:active { transform: scale(0.98); }
-    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
-
-    .error-msg {
-      color: #e63329;
-      font-size: 0.85rem;
-      margin-top: 6px;
-      display: none;
-    }
-
-    /* ── Hidden content ── */
-    #content {
-      display: none;
+      line-height: 1.25;
+      color: #111111;
     }
 
     /* ── Red bar ── */
@@ -153,23 +65,96 @@
 
     /* ── Video section ── */
     #video-section {
-      padding: 0 0 40px;
+      padding: 0 0 24px;
     }
 
-    .video-wrap {
+    .video-outer {
+      margin-top: 24px;
       position: relative;
       padding-bottom: 56.25%;
       height: 0;
       overflow: hidden;
-      background: #000;
+      background: #111;
+      border-radius: 6px;
     }
 
-    .video-wrap iframe {
+    /* thumbnail image fills the box */
+    #video-thumb {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    /* red circular play button */
+    #play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 72px;
+      height: 72px;
+      background: #e63329;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.45);
+      transition: transform 0.15s, background 0.15s;
+      pointer-events: none; /* clicks pass through to #video-thumb */
+    }
+
+    #video-thumb:hover #play-btn,
+    .video-outer:hover #play-btn {
+      transform: translate(-50%, -50%) scale(1.08);
+      background: #c9281f;
+    }
+
+    #play-btn svg {
+      width: 28px;
+      height: 28px;
+      fill: #ffffff;
+      margin-left: 4px; /* optical centre for triangle */
+    }
+
+    /* actual iframe, hidden until unlocked */
+    #video-iframe-wrap {
+      display: none;
+      position: absolute;
+      inset: 0;
+    }
+
+    #video-iframe-wrap iframe {
+      width: 100%;
+      height: 100%;
       border: none;
     }
+
+    /* ── CTA button on page ── */
+    #page-cta {
+      text-align: center;
+      padding: 0 16px 36px;
+    }
+
+    #page-cta button {
+      background: #28a745;
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 900;
+      border: none;
+      border-radius: 8px;
+      padding: 16px 32px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    #page-cta button:hover  { background: #218838; }
+    #page-cta button:active { transform: scale(0.98); }
 
     /* ── Calendar section ── */
     #calendar-section {
@@ -214,71 +199,206 @@
       font-size: 1rem;
       color: #111111;
     }
+
+    /* ══════════════════════════════
+       MODAL
+    ══════════════════════════════ */
+    #modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow-y: auto;
+    }
+
+    #modal-overlay.hidden {
+      display: none;
+    }
+
+    #modal-box {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+    }
+
+    #modal-close {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: #888888;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+
+    #modal-close:hover { color: #111111; }
+
+    #modal-box h2 {
+      font-size: clamp(1.1rem, 3.5vw, 1.35rem);
+      font-weight: 900;
+      line-height: 1.3;
+      color: #f5a623;
+      margin-bottom: 24px;
+      padding-right: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      color: #111111;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="tel"] {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 1rem;
+      border: 2px solid #cccccc;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input[type="text"]:focus,
+    .form-group input[type="tel"]:focus {
+      border-color: #f5a623;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .radio-group input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #f5a623;
+      flex-shrink: 0;
+    }
+
+    .error-msg {
+      color: #e63329;
+      font-size: 0.85rem;
+      margin-top: 6px;
+      display: none;
+    }
+
+    #modal-submit {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: #f5a623;
+      color: #111111;
+      font-size: 1.1rem;
+      font-weight: 900;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 24px;
+      letter-spacing: 0.01em;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    #modal-submit:hover  { background: #e09400; }
+    #modal-submit:active { transform: scale(0.98); }
+    #modal-submit:disabled { opacity: 0.6; cursor: not-allowed; }
   </style>
 </head>
 <body>
 
-  <!-- ═══════════════════════════════
-       SECTION 1 — GATE FORM
-  ════════════════════════════════ -->
-  <div id="gate">
-    <div class="container">
-      <h1>We Help Martial Arts Schools Get More Students With AI, Smart Websites, and 5 Star Reviews for Just $297/mo 👇</h1>
+  <!-- ══════════════════════════════
+       MODAL
+  ══════════════════════════════ -->
+  <div id="modal-overlay">
+    <div id="modal-box">
+      <button id="modal-close" aria-label="Close">&times;</button>
+      <h2>We Help Martial Arts Schools Get More Students With AI, Smart Websites, and 5 Star Reviews for Just $297/mo 👇</h2>
 
-      <div class="form-card">
-        <form id="leadForm" novalidate>
+      <form id="leadForm" novalidate>
 
-          <div class="form-group">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" placeholder="John Smith" required />
-            <div class="error-msg" id="nameError">Please enter your name.</div>
+        <div class="form-group">
+          <label for="fname">Your Name</label>
+          <input type="text" id="fname" name="name" placeholder="John Smith" required />
+          <div class="error-msg" id="nameError">Please enter your name.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="fphone">Your Mobile Phone</label>
+          <input type="tel" id="fphone" name="phone" placeholder="(555) 555-5555" required />
+          <div class="error-msg" id="phoneError">Please enter your mobile phone number.</div>
+        </div>
+
+        <div class="form-group">
+          <label>What's your current monthly revenue?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="revenue" value="$0–$5,000" required /> $0–$5,000</label>
+            <label><input type="radio" name="revenue" value="$5,000–$15,000" /> $5,000–$15,000</label>
+            <label><input type="radio" name="revenue" value="$15,000–$50,000" /> $15,000–$50,000</label>
+            <label><input type="radio" name="revenue" value="$50,000+" /> $50,000+</label>
           </div>
+          <div class="error-msg" id="revenueError">Please select your monthly revenue.</div>
+        </div>
 
-          <div class="form-group">
-            <label for="phone">Your Mobile Phone</label>
-            <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" required />
-            <div class="error-msg" id="phoneError">Please enter your mobile phone number.</div>
-          </div>
-
-          <div class="form-group">
-            <label>What's your current monthly revenue?</label>
-            <div class="radio-group">
-              <label>
-                <input type="radio" name="revenue" value="$0–$5,000" required />
-                $0–$5,000
-              </label>
-              <label>
-                <input type="radio" name="revenue" value="$5,000–$15,000" />
-                $5,000–$15,000
-              </label>
-              <label>
-                <input type="radio" name="revenue" value="$15,000–$50,000" />
-                $15,000–$50,000
-              </label>
-              <label>
-                <input type="radio" name="revenue" value="$50,000+" />
-                $50,000+
-              </label>
-            </div>
-            <div class="error-msg" id="revenueError">Please select your monthly revenue.</div>
-          </div>
-
-          <button type="submit" class="btn-primary" id="submitBtn">Click to See How it Works</button>
-        </form>
-      </div>
+        <button type="submit" id="modal-submit">Click to See How it Works</button>
+      </form>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════
-       HIDDEN CONTENT
-  ════════════════════════════════ -->
-  <div id="content">
+  <!-- ══════════════════════════════
+       PAGE — always visible
+  ══════════════════════════════ -->
 
-    <!-- SECTION 2 — VIDEO -->
-    <div id="video-section">
-      <div class="red-bar">⬇️ Step 1: Watch This 6 Min Video ⬇️</div>
-      <div class="container">
-        <div class="video-wrap" style="margin-top:24px;">
+  <!-- Headline -->
+  <div id="page-headline">
+    <div class="container">
+      <h1>We Help Martial Arts Schools Get More Students With AI, Smart Websites, and 5 Star Reviews for Just $297/mo</h1>
+    </div>
+  </div>
+
+  <!-- Video -->
+  <div id="video-section">
+    <div class="red-bar">⬇️ Step 1: Watch This 6 Min Video ⬇️</div>
+    <div class="container">
+      <div class="video-outer" style="margin-top:24px;">
+
+        <!-- Thumbnail + play button (shown before unlock) -->
+        <div id="video-thumb">
+          <img id="thumb-img" src="" alt="Video thumbnail"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+          <div id="play-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="5,3 19,12 5,21" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Actual iframe (shown after form submit) -->
+        <div id="video-iframe-wrap">
           <iframe
             src="https://player.vimeo.com/video/1189422105"
             allow="autoplay; fullscreen; picture-in-picture"
@@ -286,85 +406,129 @@
             title="CombatBoost Overview">
           </iframe>
         </div>
+
       </div>
     </div>
+  </div>
 
-    <!-- SECTION 3 — CALENDAR -->
-    <div id="calendar-section">
-      <div class="container">
-        <p class="step-label">👇 Step 2: Book A Call Below 👇</p>
-        <iframe src="https://api.leadconnectorhq.com/widget/booking/3alX9SF4TpRuIAMoIPfa" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="3alX9SF4TpRuIAMoIPfa_1777993532536"></iframe><br><script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
-        <p class="cal-fallback">
-          Calendar not loading?
-          <a href="https://api.leadconnectorhq.com/widget/booking/3alX9SF4TpRuIAMoIPfa" target="_blank" rel="noopener">Click here</a>
-        </p>
-      </div>
+  <!-- Green CTA button -->
+  <div id="page-cta">
+    <button id="cta-btn">Click to See How it Works</button>
+  </div>
+
+  <!-- Calendar -->
+  <div id="calendar-section">
+    <div class="container">
+      <p class="step-label">👇 Step 2: Book A Call Below 👇</p>
+      <iframe src="https://api.leadconnectorhq.com/widget/booking/3alX9SF4TpRuIAMoIPfa" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="3alX9SF4TpRuIAMoIPfa_1777993532536"></iframe><br><script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
+      <p class="cal-fallback">
+        Calendar not loading?
+        <a href="https://api.leadconnectorhq.com/widget/booking/3alX9SF4TpRuIAMoIPfa" target="_blank" rel="noopener">Click here</a>
+      </p>
     </div>
+  </div>
 
-    <!-- SECTION 4 — FOOTER -->
-    <div id="footer">
-      <div class="container">
-        <p>$297/month &middot; No setup fee &middot; 30-day money back guarantee</p>
-        <p>Martial arts schools only. Built on the same system used in 1,800+ facilities.</p>
-      </div>
+  <!-- Footer -->
+  <div id="footer">
+    <div class="container">
+      <p>$297/month &middot; No setup fee &middot; 30-day money back guarantee</p>
+      <p>Martial arts schools only. Built on the same system used in 1,800+ facilities.</p>
     </div>
-
-  </div><!-- /#content -->
+  </div>
 
   <script>
     const WEBHOOK = 'https://services.leadconnectorhq.com/hooks/DxY1l0vBS9031FOFtjG2/webhook-trigger/b045ff08-3453-4ec2-a303-8b359a64df05';
 
+    const overlay      = document.getElementById('modal-overlay');
+    const videoThumb   = document.getElementById('video-thumb');
+    const iframeWrap   = document.getElementById('video-iframe-wrap');
+    const ctaBtn       = document.getElementById('cta-btn');
+    let   formDone     = false;
+
+    // ── Load Vimeo thumbnail ──
+    fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/1189422105')
+      .then(r => r.json())
+      .then(d => {
+        if (d.thumbnail_url) {
+          document.getElementById('thumb-img').src = d.thumbnail_url;
+        }
+      })
+      .catch(() => {});
+
+    // ── Open / close modal ──
+    function openModal()  { overlay.classList.remove('hidden'); }
+    function closeModal() { overlay.classList.add('hidden'); }
+
+    // Auto-open on load
+    openModal();
+
+    // X button — close without submitting
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+
+    // Click outside white box — close
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal();
+    });
+
+    // Red play button — reopen modal if form not done
+    videoThumb.addEventListener('click', function () {
+      if (!formDone) {
+        openModal();
+      } else {
+        videoThumb.style.display   = 'none';
+        iframeWrap.style.display   = 'block';
+      }
+    });
+
+    // Green CTA button — reopen modal if form not done
+    ctaBtn.addEventListener('click', function () {
+      if (!formDone) {
+        openModal();
+      }
+    });
+
+    // ── Form submit ──
     document.getElementById('leadForm').addEventListener('submit', async function (e) {
       e.preventDefault();
 
-      const name    = document.getElementById('name').value.trim();
-      const phone   = document.getElementById('phone').value.trim();
+      const name    = document.getElementById('fname').value.trim();
+      const phone   = document.getElementById('fphone').value.trim();
       const revenue = document.querySelector('input[name="revenue"]:checked');
 
       let valid = true;
-
       document.getElementById('nameError').style.display    = 'none';
       document.getElementById('phoneError').style.display   = 'none';
       document.getElementById('revenueError').style.display = 'none';
 
-      if (!name) {
-        document.getElementById('nameError').style.display = 'block';
-        valid = false;
-      }
-      if (!phone) {
-        document.getElementById('phoneError').style.display = 'block';
-        valid = false;
-      }
-      if (!revenue) {
-        document.getElementById('revenueError').style.display = 'block';
-        valid = false;
-      }
-
+      if (!name)    { document.getElementById('nameError').style.display    = 'block'; valid = false; }
+      if (!phone)   { document.getElementById('phoneError').style.display   = 'block'; valid = false; }
+      if (!revenue) { document.getElementById('revenueError').style.display = 'block'; valid = false; }
       if (!valid) return;
 
-      const btn = document.getElementById('submitBtn');
-      btn.disabled = true;
+      const btn = document.getElementById('modal-submit');
+      btn.disabled    = true;
       btn.textContent = 'Submitting…';
 
       try {
         await fetch(WEBHOOK, {
-          method: 'POST',
+          method:  'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name:    name,
-            phone:   phone,
-            revenue: revenue.value
-          }),
-          mode: 'no-cors'
+          body:    JSON.stringify({ name, phone, revenue: revenue.value }),
+          mode:    'no-cors'
         });
-      } catch (_) {
-        // no-cors fetch always resolves; swallow any network error silently
-      }
+      } catch (_) {}
 
       fbq('track', 'Lead');
 
-      document.getElementById('gate').style.display    = 'none';
-      document.getElementById('content').style.display = 'block';
+      formDone = true;
+      closeModal();
+
+      // Swap thumbnail for live iframe immediately
+      videoThumb.style.display = 'none';
+      iframeWrap.style.display = 'block';
+
+      // Hide green CTA button now that form is done
+      ctaBtn.style.display = 'none';
     });
   </script>
 
