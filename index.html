@@ -402,7 +402,7 @@
         <!-- Actual iframe (shown after form submit) -->
         <div id="video-iframe-wrap">
           <iframe
-            src="https://player.vimeo.com/video/1189422105"
+            src="https://player.vimeo.com/video/1190238440?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
             allow="autoplay; fullscreen; picture-in-picture"
             allowfullscreen
             title="CombatBoost Overview">
@@ -448,7 +448,7 @@
     let   formDone     = false;
 
     // ── Load Vimeo thumbnail ──
-    fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/1189422105')
+    fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/1190238440')
       .then(r => r.json())
       .then(d => {
         if (d.thumbnail_url) {
